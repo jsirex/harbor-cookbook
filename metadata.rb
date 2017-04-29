@@ -10,7 +10,7 @@ issues_url       'https://github.com/jsirex/harbor-cookbook/issues'
 source_url       'https://github.com/jsirex/harbor-cookbook'
 version          '0.1.0'
 
-depends 'docker'
+depends 'docker', '>= 2.15.5'
 
 supports 'debian'
 supports 'ubuntu'

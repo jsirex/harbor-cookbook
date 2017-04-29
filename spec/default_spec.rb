@@ -4,8 +4,10 @@ require 'spec_helper'
 
 describe 'harbor::default' do
   cached(:chef_run) do
-    ChefSpec::SoloRunner.new.converge(described_recipe)
+    ChefSpec::SoloRunner.new(platform: 'debian', version: '8.7').converge(described_recipe)
   end
 
-  it 'pending your test'
+  it 'runs' do
+    expect(chef_run)
+  end
 end

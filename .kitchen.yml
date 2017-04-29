@@ -33,6 +33,7 @@ platforms:
 suites:
   - name: harbor
     run_list:
+      - recipe[harbor-test::docker_engine]
       - recipe[harbor]
     attributes:
 
