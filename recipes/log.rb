@@ -1,18 +1,25 @@
 # frozen_string_literal: true
 
-directory '/var/log/harbor'
+log = node['harbor']['log']
 
-docker_image 'vmware/harbor-log' do
-  tag 'v1.1.0'
+directory log['log_dir'] do
+  recursive true
+end
+
+docker_image log['image'] do
+  tag log['tag']
   action :pull
 end
 
 docker_container 'harbor-log' do
-  repo 'vmware/harbor-log'
-  tag 'v1.1.0'
+  repo log['image']
+  tag log['tag']
   restart_policy 'always'
 
-  volumes ['/var/log/harbor/:/var/log/docker/:z']
+  volumes ["#{log['log_dir']}:/var/log/docker/:z"]
+
   port ['127.0.0.1:1514:514']
+
   network_mode 'harbor'
+  network_aliases ['log']
 end
