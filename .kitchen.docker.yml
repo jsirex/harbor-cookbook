@@ -1,7 +1,6 @@
 ---
 driver:
   name: docker
-  priveleged: true # run docker on docker
 
 provisioner:
   name: chef_zero
@@ -11,17 +10,15 @@ platforms:
   - name: debian-8.7
     driver_config:
       provision_command:
-        - apt-get update
-        - apt-get -f -y install build-essential libxml2 libxml2-dev libxml2-utils
-        - apt-get -f -y install net-tools apt-transport-https lsb-release kmod iptables
+        - apt-get update && apt-get -f -y install build-essential libxml2 libxml2-dev libxml2-utils
+        - apt-get update && apt-get -f -y install net-tools apt-transport-https lsb-release kmod iptables
         - curl -L https://www.opscode.com/chef/install.sh | bash -s -- -v 12.14.89
       run_command: /bin/systemd
 
   - name: ubuntu-16.04
     driver_config:
       provision_command:
-        - apt-get update
-        - apt-get -f -y install build-essential libxml2 libxml2-dev libxml2-utils
-        - apt-get -f -y install net-tools apt-transport-https lsb-release kmod iptables
+        - apt-get update && apt-get -f -y install build-essential libxml2 libxml2-dev libxml2-utils
+        - apt-get update && apt-get -f -y install net-tools apt-transport-https lsb-release kmod iptables
         - curl -L https://www.opscode.com/chef/install.sh | bash -s -- -v 12.14.89
       run_command: /bin/systemd

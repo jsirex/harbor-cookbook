@@ -6,6 +6,9 @@ driver:
   customize:
     cpus: 1
     memory: 2048
+  network:
+    private_network:
+      type: dhcp
 
 provisioner:
   name: chef_zero
