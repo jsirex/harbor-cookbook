@@ -33,3 +33,5 @@ default['harbor']['registry']['config']['notifications']['endpoints'] = [
     'backoff' => '1s'
   }
 ]
+
+default['harbor']['registry']['env']['GODEBUG'] = 'netdns=cgo'

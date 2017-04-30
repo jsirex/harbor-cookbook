@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 registry = node['harbor']['registry']
+env_array = registry['env'].collect { |x, y| "#{x}=#{y}" }
 
 directory registry['etc_dir']
 directory registry['storage_dir']
@@ -34,6 +35,8 @@ docker_container 'registry' do
   repo 'vmware/registry'
   tag 'photon-2.6.0'
   restart_policy 'always'
+  env env_array
+
   volumes [
     "#{registry['etc_dir']}:#{registry['etc_dir']}:z",
     "#{registry['storage_dir']}:#{registry['storage_dir']}:z"
