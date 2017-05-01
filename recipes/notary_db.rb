@@ -5,11 +5,10 @@ docker_image 'vmware/harbor-notary-db' do
   action :pull
 end
 
-docker_container 'notary-db' do
+docker_container 'harbor-notary-db' do
   repo 'vmware/harbor-notary-db'
   tag 'mariadb-10.1.10'
   restart_policy 'always'
-  restart_maximum_retry_count 5
 
   volumes [
     './common/config/notary/mysql-initdb.d:/docker/entrypoint-initdb.d',
@@ -21,6 +20,7 @@ docker_container 'notary-db' do
   command 'mysqld --innodb_file_per_table'
 
   network_mode 'harbor'
+  network_aliases ['notary-db']
 
   log_driver 'syslog'
   log_opts 'syslog-address' => 'tcp://127.0.0.1:1514', 'tag' => 'notary-db'

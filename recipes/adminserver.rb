@@ -34,6 +34,7 @@ docker_container 'harbor-adminserver' do
   ]
 
   network_mode 'harbor'
+  network_aliases ['adminserver']
 
   log_driver 'syslog'
   log_opts 'syslog-address' => 'tcp://127.0.0.1:1514', 'tag' => 'adminserver'

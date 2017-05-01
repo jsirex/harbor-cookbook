@@ -20,6 +20,7 @@ end
 docker_container 'harbor-ui' do
   repo 'vmware/harbor-ui'
   tag 'v1.1.0'
+
   restart_policy 'always'
 
   env env_array
@@ -32,6 +33,7 @@ docker_container 'harbor-ui' do
   ]
 
   network_mode 'harbor'
+  network_aliases ['ui']
 
   log_driver 'syslog'
   log_opts 'syslog-address' => 'tcp://127.0.0.1:1514', 'tag' => 'ui'

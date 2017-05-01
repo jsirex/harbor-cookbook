@@ -5,11 +5,10 @@ docker_image 'vmware/notary-photon' do
   action :pull
 end
 
-docker_container 'notary-server' do
+docker_container 'harbor-notary-server' do
   repo 'vmware/notary-photon'
   tag 'server-0.5.0'
   restart_policy 'always'
-  restart_maximum_retry_count 5
 
   volumes [
     './common/config/notary:/config'
@@ -19,6 +18,7 @@ docker_container 'notary-server' do
   command '-c /migrations/migrate.sh && notary-server -config=/config/server-config.json -logf=logfmt'
 
   network_mode 'harbor'
+  network_aliases ['notary-server']
 
   log_driver 'syslog'
   log_opts 'syslog-address' => 'tcp://127.0.0.1:1514', 'tag' => 'notary-server'
