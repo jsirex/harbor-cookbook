@@ -36,6 +36,7 @@ docker_image registry['image'] do
   action :pull
 end
 
+# BUG: in compose container name is registry
 docker_container 'harbor-registry' do
   repo registry['image']
   tag registry['tag']
@@ -50,10 +51,13 @@ docker_container 'harbor-registry' do
   ]
 
   network_mode 'harbor'
+
+  # BUG: why do I need this alias?
   network_aliases ['registry']
 
   command 'serve /etc/registry/config.yml'
 
   log_driver 'syslog'
+  # BUG: rename registry -> harbor-registry?
   log_opts 'syslog-address' => 'tcp://127.0.0.1:1514', 'tag' => 'registry'
 end

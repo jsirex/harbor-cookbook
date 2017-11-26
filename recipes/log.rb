@@ -21,5 +21,7 @@ docker_container 'harbor-log' do
   port ['127.0.0.1:1514:514']
 
   network_mode 'harbor'
+
+  # BUG: why do I need this alias?
   network_aliases ['log']
 end

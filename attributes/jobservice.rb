@@ -10,5 +10,5 @@ default['harbor']['jobservice']['env']['GODEBUG'] = 'netdns=cgo'
 
 # Configuration
 default['harbor']['jobservice']['config']['appname'] = 'jobservice'
-default['harbor']['jobservice']['config']['runmode'] = 'prod' # was dev, changed
+default['harbor']['jobservice']['config']['runmode'] = 'prod' # BUG: why it dev? changed to  prod
 default['harbor']['jobservice']['config']['port'] = 80
